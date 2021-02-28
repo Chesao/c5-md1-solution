@@ -12,36 +12,34 @@ function LunchCheckController($scope) {
         "Too much!"
     ];
     $scope.message = msgs[0];
-    $scope.fontcolor = "red";
+    $scope.msgcolor = "red";
     $scope.items = "";
 
     $scope.checkLunch = function () {
-        var orgitems = $scope.items;
-        var commaitems = orgitems.replace(/\s/g,'');
-        var lastcommaitems = commaitems.replace(/,{2,}/g,',');
-        var items = lastcommaitems.replace(/,$/,'');
-        var item = items.split(",");
-        var imsg = 0;
+        var inItems = $scope.items;
+        var outItems = inItems
+                        .replace(/\s{2,}/g,' ') // replace 2 or more white spaces with 1 space
+                        .replace(/\s,/g,',')    // remove white space before comma
+                        .replace(/,\s/g,',')    // remove white space after comma
+                        .replace(/,{2,}/g,',')  // replace 2 or more commas with 1 comma
+                        .replace(/,$/,'')       // remove tailing comma
+                        .replace(/^,/,'');      // remove heading comma
+        var item = outItems.split(",");
 
-        console.log(orgitems);
-        console.log(commaitems);
-        console.log(lastcommaitems);
-        console.log(items);
+        console.log(item);
+        console.log(item.length);
         if (item.length == 1 && item[0]=="") {
-            imsg = 0;
-            $scope.fontcolor = "red";
+            $scope.message = msgs[0];
+            $scope.msgcolor = "red";
         }
         else if (item.length <= 3) {
-            imsg = 1;
-            $scope.fontcolor = "green";
+            $scope.message = msgs[1];
+            $scope.msgcolor = "green";
         }
         else {
-            imsg = 2;
-            $scope.fontcolor = "green";
+            $scope.message = msgs[2];
+            $scope.msgcolor = "green";
         }
-        console.log(item.length);
-        console.log(imsg);
-        $scope.message = msgs[imsg];
     }
 }
 
