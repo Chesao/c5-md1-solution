@@ -1,15 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="LunchCheck" ng-controller="LunchCheckController">
   <head>
     <title>Lunch Checker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <style>
-      .message { font-size: 1.3em; font-weight: bold; }
+      .message {
+        font-size: 1.3em; font-weight: bold;
+        color:{{msgcolor}}; border: 2px solid {{msgcolor}}
+      }
     </style>
   </head>
-<body ng-app="LunchCheck">
-   <div class="container" ng-controller="LunchCheckController">
+<body>
+   <div class="container">
      <h1>Lunch Checker</h1>
 
          <div class="form-group">
@@ -21,8 +24,7 @@
          <div class="form-group">
              <button class="btn btn-default" ng-click="checkLunch()">Check If Too Much</button>
          </div>
-         <div class="form-group message"
-          style="color:{{msgcolor}}; border: 2px solid {{msgcolor}};">
+         <div class="form-group message">
            {{message}}
          </div>
    </div>
